@@ -10,7 +10,7 @@ recipe           "td-agent", "td-agent configuration"
   supports os
 end
 
-depends 'apt'
+#depends 'apt'
 depends 'yum'
 
 attribute "td_agent/api_key",
