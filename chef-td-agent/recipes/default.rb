@@ -29,21 +29,26 @@ directory '/etc/td-agent/' do
   action :create
 end
 
-case node['platform']
-when "ubuntu"
-  dist = node['lsb']['codename']
-  source = (dist == 'precise') ? "http://packages.treasure-data.com/precise/" : "http://packages.treasure-data.com/debian/"
-  apt_repository "treasure-data" do
-    uri source
-    distribution dist
-    components ["contrib"]
-    action :add
-  end
-when "centos", "redhat", "amazon"
-  yum_repository "treasure-data" do
-    url "http://packages.treasure-data.com/redhat/$basearch"
-    action :add
-  end
+#case node['platform']
+#when "ubuntu"
+#  dist = node['lsb']['codename']
+#  source = (dist == 'precise') ? "http://packages.treasure-data.com/precise/" : "http://packages.treasure-data.com/debian/"
+#  apt_repository "treasure-data" do
+#    uri source
+#    distribution dist
+#    components ["contrib"]
+#    action :add
+#  end
+#when "centos", "redhat", "amazon"
+#  yum_repository "treasure-data" do
+#    url "http://packages.treasure-data.com/redhat/$basearch"
+#    action :add
+#  end
+#end
+
+yum_repository "treasure-data" do
+  url "http://packages.treasure-data.com/redhat/$basearch"
+  action :add
 end
 
 template "/etc/td-agent/td-agent.conf" do
